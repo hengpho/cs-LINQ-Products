@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using Products;
@@ -100,5 +101,42 @@ public class Tests
     // Assert
     // Make sure the expected and actual are equal
     Assert.AreEqual(expected, actual);
+  }
+
+  [Test]
+  // Get the top 3 most expensive items
+  public void GetTop3MostExpensiveInStockItems_ReturnsTop3MostExpensiveInStockItems()
+  {
+    List<Product> expected = new List<Product>()
+    {
+      new()
+      {
+        ProductId = 5,
+        ProductName = "Uncle Bob's Organic Dried Pears",
+        Category = "Produce",
+        UnitPrice = 20M,
+        InStock = 10
+      },
+      new()
+      {
+        ProductId = 2,
+        ProductName = "Chang",
+        Category = "Beverages",
+        UnitPrice = 19.00M,
+        InStock = 10
+      },
+      new()
+      {
+        ProductId = 1,
+        ProductName = "Chai",
+        Category = "Beverages",
+        UnitPrice = 18.00M,
+        InStock = 20
+      }
+    };
+
+    IEnumerable<Product> actual = _service.GetTop3MostExpensiveInStockItems();
+    IComparer comparer = new ProductComparer();
+    CollectionAssert.AreEqual(expected, actual, comparer);
   }
 }

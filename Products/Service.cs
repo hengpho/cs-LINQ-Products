@@ -27,4 +27,9 @@ public class Service
 
     return outOfStockItems.ToArray();
   }
+
+  public IEnumerable<Product> GetTop3MostExpensiveInStockItems()
+  {
+    return _products.Where(p => p.InStock > 0).OrderByDescending(p => p.UnitPrice).Take(3).ToList();
+  }
 }
