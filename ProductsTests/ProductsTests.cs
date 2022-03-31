@@ -68,9 +68,37 @@ public class Tests
     _service = new Service(products);
   }
 
-    [Test]
-    public void Test1()
-    {
-        Assert.Pass();
-    }
+  [Test]
+  // Get out of stock items
+  public void GetOutOfStockItems_ReturnsIdsOfOutOfStockItems()
+  {
+    // Arrange
+    // Get back a list of the product ids
+    int[] expected = {4, 6};
+
+    // Act
+    // Call the method
+    var actual = _service.GetOutOfStockItems();
+
+    // Assert
+    // Make sure the expected and actual are equal
+    Assert.AreEqual(expected, actual);
+  }
+
+  [Test]
+  // Get Average Price By Category
+  public void GetAveragePriceByCategory_ReturnsAveragePriceByCategory()
+  {
+    // Arrange
+    // Get back a Dictionary ot the category and average price
+    var expected = new Dictionary<string, decimal> {{"Beverages", 18.50M}, {"Condiments", 16.00M}, {"Produce", 25.00M}};
+
+    // Act
+    // Call the method
+    var actual = _service.GetAveragePriceByCategory();
+
+    // Assert
+    // Make sure the expected and actual are equal
+    Assert.AreEqual(expected, actual);
+  }
 }
